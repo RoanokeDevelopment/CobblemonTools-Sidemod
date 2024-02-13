@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/CobblemonTools.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/CobblemonTools.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/CobblemonTools.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/CobblemonTools.common.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/CobblemonTools.fabric.main.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/CobblemonTools.fabric.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/CobblemonTools.fabric.test.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/CobblemonTools.fabric.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/CobblemonTools.forge.main.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/CobblemonTools.forge.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/CobblemonTools.forge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/CobblemonTools.forge.test.iml" />
+    </modules>
+  </component>
+</project>
