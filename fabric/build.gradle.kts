@@ -19,11 +19,17 @@ loom {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 val shadowCommon = configurations.create("shadowCommon")
 dependencies {
     minecraft("com.mojang:minecraft:1.20.1")
     mappings("net.fabricmc:yarn:1.20.1+build.10")
     modImplementation("net.fabricmc:fabric-loader:0.14.21")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 
     modRuntimeOnly("net.fabricmc.fabric-api:fabric-api:0.89.3+1.20.1")
     modImplementation(fabricApi.module("fabric-command-api-v2", "0.89.3+1.20.1"))
