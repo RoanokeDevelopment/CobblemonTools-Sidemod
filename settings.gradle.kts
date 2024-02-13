@@ -9,8 +9,7 @@ pluginManagement {
     }
 }
 
-listOf(
-    "common",
-    "forge",
-    "fabric"
-).forEach { include(it)}
+
+include("common")
+include("fabric")
+include("forge")

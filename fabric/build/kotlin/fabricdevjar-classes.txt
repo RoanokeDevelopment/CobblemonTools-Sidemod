@@ -1,1 +1,0 @@
-/home/xander/IdeaProjects/CobblemonTools/fabric/build/classes/java/main/dev/roanoke/fabric/cobblemontools/FabricBootstrap.class:/home/xander/IdeaProjects/CobblemonTools/fabric/build/classes/kotlin/main/dev/roanoke/fabric/cobblemontools/CobblemonToolsFabric.class
