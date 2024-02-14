@@ -7,7 +7,7 @@ import java.io.FileReader
 import java.io.FileWriter
 
 data class Config(
-    var CobblemonToolsURL: String = "https://cobblemon.tools/",
+    var CobblemonToolsURL: String = "https://cobblemon.tools",
     var CobblemonToolsKey: String = "") {
     companion object {
         private val gson: Gson = GsonBuilder().setPrettyPrinting().create()

@@ -4,13 +4,14 @@ import com.cobblemon.mod.common.Cobblemon
 import com.cobblemon.mod.common.api.storage.party.PlayerPartyStore
 import com.cobblemon.mod.common.net.messages.client.storage.party.SetPartyPokemonPacket
 import com.cobblemon.mod.common.pokemon.Pokemon
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import dev.roanoke.common.cobblemontools.CobblemonTools
 import dev.roanoke.common.cobblemontools.util.PokemonConversions
 import net.minecraft.server.network.ServerPlayerEntity
 
 class CTTeam(private val party: MutableList<CTPokemon?>,
-             val name: String = "Default Team",
+             var name: String = "Default Team",
              val id: String = ""
 ) : Iterable<CTPokemon?> {
 
@@ -30,6 +31,11 @@ class CTTeam(private val party: MutableList<CTPokemon?>,
             return CTTeam(party)
         }
 
+        fun fromPlayerParty(player: ServerPlayerEntity): CTTeam {
+            var playerParty: PlayerPartyStore? = null
+            playerParty = Cobblemon.storage.getParty(player)
+            return fromParty(playerParty)
+        }
 
         fun fromJson(json: JsonObject): CTTeam? {
             try {
@@ -147,5 +153,15 @@ class CTTeam(private val party: MutableList<CTPokemon?>,
 
         if (MAX_SIZE != other.MAX_SIZE) return false
         return party == other.party
+    }
+
+    fun toJsonString(): String {
+        val gson = GsonBuilder().setPrettyPrinting().create()
+        val teamMap = mapOf(
+            "name" to name,
+            "format" to "cobblemon",
+            "team" to this.getTeamList()
+        )
+        return gson.toJson(teamMap).toString()
     }
 }
