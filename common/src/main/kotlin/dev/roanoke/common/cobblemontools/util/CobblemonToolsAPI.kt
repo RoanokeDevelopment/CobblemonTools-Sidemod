@@ -1,5 +1,6 @@
 package dev.roanoke.common.cobblemontools.util
 
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import dev.roanoke.common.cobblemontools.CobblemonTools
 import dev.roanoke.common.cobblemontools.formats.CTTeam
@@ -82,6 +83,60 @@ object CobblemonToolsAPI {
             )
             null
         }
+    }
+
+    suspend fun pokePasteToTeamID(pokepasteUrl: String): String? = withContext(Dispatchers.IO) {
+        val urlString = CobblemonTools.config.CobblemonToolsURL + "/api/v1/teams"
+        CobblemonTools.LOGGER.info("Trying to convert PokePaste ({$pokepasteUrl}) to Cobblemoon Tools Team. Posting to: $urlString")
+        try {
+            val url = URL(urlString)
+            val con = url.openConnection() as HttpURLConnection
+            con.requestMethod = "POST"
+            con.setRequestProperty("Content-Type", "application/json; utf-8")
+            con.setRequestProperty("Accept", "application/json")
+            con.doOutput = true
+
+            val gson = GsonBuilder().setPrettyPrinting().create()
+            var data = mapOf(
+                "format" to "pokepaste",
+                "pokepaste" to pokepasteUrl
+            )
+            val payload = gson.toJson(data).toString()
+
+            OutputStreamWriter(con.outputStream, StandardCharsets.UTF_8).use { writer ->
+                writer.write(payload)
+                writer.flush()
+            }
+
+            if (con.responseCode == HttpURLConnection.HTTP_OK) {
+                con.inputStream.bufferedReader(StandardCharsets.UTF_8).use { reader ->
+                    val response = reader.readText()
+                    val responseJson = JsonParser.parseString(response).asJsonObject
+                    if (responseJson.has("team_id")) {
+                        responseJson.get("team_id").asString
+                    } else {
+                        CobblemonTools.LOGGER.info("Failed to convert PokePaste to Cobblemon Tools Format...")
+                        null
+                    }
+                }
+            } else {
+                throw IOException("POST request failed, response code: ${con.responseCode}")
+            }
+        } catch (e: IOException) {
+            CobblemonTools.LOGGER.error(
+                "IO Exception when trying to convert PokePaste, is Cobblemon Tools up?",
+                e
+            )
+            null
+        }
+    }
+
+    suspend fun pokePasteToCTTeam(pokepasteUrl: String): CTTeam? = withContext(Dispatchers.IO) {
+        var team_id = pokePasteToTeamID(pokepasteUrl)
+        if (team_id == null) {
+            CobblemonTools.LOGGER.error("Failed to convert PokePaste to Cobblemon Tools Team...")
+        }
+        return@withContext getTeamById(team_id!!)
     }
 
 

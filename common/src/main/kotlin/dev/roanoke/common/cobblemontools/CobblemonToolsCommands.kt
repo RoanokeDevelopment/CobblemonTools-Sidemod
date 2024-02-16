@@ -1,6 +1,7 @@
 package dev.roanoke.common.cobblemontools
 
 import com.mojang.brigadier.CommandDispatcher
+import dev.roanoke.common.cobblemontools.commands.GetPokePasteCommand
 import dev.roanoke.common.cobblemontools.commands.GetTeamCommand
 import dev.roanoke.common.cobblemontools.commands.UploadTeamCommand
 import net.minecraft.command.CommandRegistryAccess
@@ -11,6 +12,7 @@ object CobblemonToolsCommands {
     fun register(dispatcher: CommandDispatcher<ServerCommandSource>, registry: CommandRegistryAccess, selection: CommandManager.RegistrationEnvironment) {
         GetTeamCommand.register(dispatcher)
         UploadTeamCommand.register(dispatcher)
+        GetPokePasteCommand.register(dispatcher)
     }
 
 }
