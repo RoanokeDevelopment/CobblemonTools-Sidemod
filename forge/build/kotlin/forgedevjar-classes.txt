@@ -1,1 +1,0 @@
-/home/xander/IdeaProjects/CobblemonTools/forge/build/classes/java/main/com/cobblemon/forge/example/ForgeModExample.class
