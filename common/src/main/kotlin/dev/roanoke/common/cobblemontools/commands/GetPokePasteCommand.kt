@@ -1,10 +1,12 @@
 package dev.roanoke.common.cobblemontools.commands
 
+import com.cobblemon.mod.common.util.permission
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.context.CommandContext
 import dev.roanoke.common.cobblemontools.formats.CTTeam
+import dev.roanoke.common.cobblemontools.util.permissions.CTPermissions
 import dev.roanoke.common.cobblemontools.util.CobblemonToolsAPI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +22,7 @@ object GetPokePasteCommand {
     fun register(dispatcher : CommandDispatcher<ServerCommandSource>) {
         dispatcher.register(
             CommandManager.literal("getPokePaste")
+                .permission(CTPermissions.GET_POKE_PASTE)
                 .then(
                     CommandManager.argument("pokepaste_url", StringArgumentType.greedyString())
                         .executes(::execute)

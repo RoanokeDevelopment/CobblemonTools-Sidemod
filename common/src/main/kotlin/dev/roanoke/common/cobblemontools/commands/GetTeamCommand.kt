@@ -12,6 +12,8 @@ import com.mojang.brigadier.context.CommandContext
 import dev.roanoke.common.cobblemontools.CobblemonTools
 import dev.roanoke.common.cobblemontools.formats.CTTeam
 import dev.roanoke.common.cobblemontools.util.CobblemonToolsAPI
+import dev.roanoke.common.cobblemontools.util.permissions.CTPermission
+import dev.roanoke.common.cobblemontools.util.permissions.CTPermissions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -28,6 +30,7 @@ object GetTeamCommand {
     fun register(dispatcher : CommandDispatcher<ServerCommandSource>) {
         dispatcher.register(
             CommandManager.literal("getTeam")
+            .permission(CTPermissions.GET_TEAM)
             .then(
                 CommandManager.argument("team_id", StringArgumentType.string())
                     .executes(::execute)

@@ -1,11 +1,13 @@
 package dev.roanoke.common.cobblemontools.commands
 
+import com.cobblemon.mod.common.util.permission
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.context.CommandContext
 import dev.roanoke.common.cobblemontools.formats.CTTeam
 import dev.roanoke.common.cobblemontools.util.CobblemonToolsAPI
+import dev.roanoke.common.cobblemontools.util.permissions.CTPermissions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +22,9 @@ object UploadTeamCommand {
     fun register(dispatcher : CommandDispatcher<ServerCommandSource>) {
         dispatcher.register(
             CommandManager.literal("uploadTeam")
+                .permission(CTPermissions.UPLOAD_TEAM)
                 .executes(::execute)
+                .permission(CTPermissions.UPLOAD_TEAM)
                 .then(
                     CommandManager.argument("team_name", StringArgumentType.string())
                         .executes(::execute)
