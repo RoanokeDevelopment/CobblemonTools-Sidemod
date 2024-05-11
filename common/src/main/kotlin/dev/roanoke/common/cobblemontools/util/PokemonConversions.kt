@@ -1,5 +1,6 @@
 package dev.roanoke.common.cobblemontools.util
 
+import com.cobblemon.mod.common.api.abilities.Ability
 import com.cobblemon.mod.common.api.moves.Moves
 import com.cobblemon.mod.common.api.pokemon.Natures
 import com.cobblemon.mod.common.api.pokemon.PokemonProperties
@@ -112,9 +113,11 @@ object PokemonConversions {
 
             result.level = data.level
 
-            result.ability = (result.form.abilities.find { it.template.name == data.ability }
-                ?: result.form.abilities.first())
-                .template.create()
+            val ability: Ability = result.form.abilities.find {
+                it.template.name == data.ability
+            }?.template?.create(forced=true) ?: result.form.abilities.first().template.create(forced=true)
+
+            result.updateAbility(ability)
 
             result.nature =
                 Natures.getNature(Identifier(data.nature.lowercase())) ?: Natures.getRandomNature()

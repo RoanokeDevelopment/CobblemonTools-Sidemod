@@ -3,6 +3,7 @@ plugins {
     id("dev.architectury.loom")
     id("architectury-plugin")
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    `maven-publish`
 }
 
 architectury {
@@ -37,7 +38,7 @@ dependencies {
     implementation(project(":common", configuration = "namedElements"))
     "developmentFabric"(project(":common", configuration = "namedElements"))
 
-    modImplementation("com.cobblemon:fabric:1.4.1+1.20.1")
+    modImplementation("com.cobblemon:fabric:1.5.0+1.20.1-SNAPSHOT")
 
     shadowCommon(project(":common"))
 }
@@ -65,4 +66,35 @@ tasks {
         archiveVersion.set("${rootProject.version}")
     }
 
+}
+
+publishing {
+  repositories {
+    maven {
+      name = "roanoke-development"
+      url = uri("https://vault.roanoke.dev/releases")
+      credentials {
+        username = property("roanokeDevelopmentUsername").toString()
+        password = property("roanokeDevelopmentPassword").toString()
+      }
+    }
+  }
+  publications {
+    create<MavenPublication>("mavenJava") {
+      // Assuming 'java' component exists and represents what you want to publish
+        setOf("apiElements", "runtimeElements")
+    .flatMap { configName -> configurations[configName].hierarchy }
+    .forEach { configuration ->
+        configuration.dependencies.removeIf { dependency ->
+            dependency.name == "common"
+        }
+    }
+      from(components["java"])
+
+      // Set groupId, artifactId, and version according to your project properties
+      groupId = "dev.roanoke"
+      artifactId = "CobblemonTools-${project.name}"
+      version = rootProject.version.toString()
+    }
+  }
 }

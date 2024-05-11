@@ -38,7 +38,7 @@ dependencies {
         isTransitive = false
     }
 
-    modImplementation("com.cobblemon:forge:1.4.1+1.20.1")
+    modImplementation("com.cobblemon:forge:1.5.0+1.20.1-SNAPSHOT")
     implementation("thedarkcolour:kotlinforforge:4.5.0")
 
 

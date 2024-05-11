@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "dev.roanoke"
-version = "1.0.0-SNAPSHOT"
+version = "1.0.2"
 
 allprojects {
     apply(plugin = "java")

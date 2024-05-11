@@ -11,7 +11,7 @@ repositories {
 dependencies {
     minecraft("com.mojang:minecraft:1.20.1")
     mappings("net.fabricmc:yarn:1.20.1+build.10")
-    modCompileOnly("com.cobblemon:mod:1.4.0+1.20.1-SNAPSHOT") {
+    modCompileOnly("com.cobblemon:mod:1.5.0+1.20.1-SNAPSHOT") {
         isTransitive = false
     }
 

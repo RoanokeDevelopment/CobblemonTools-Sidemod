@@ -1,11 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "cobblemon_fabric_mdk",
-  "version": "1.0.0",
-  "name": "Cobblemon Fabric MDK",
-  "description": "A MDK useful for Fabric Development",
+  "id": "cobblemontools",
+  "version": "1.0.1",
+  "name": "Cobblemon Tools Sidemod",
+  "description": "A very helpful mod for interacting with Cobblemon Tools",
   "authors": [
-    "The Cobblemon Team"
+    "Roanoke Development",
+    "complacentdev"
   ],
   "license": "MPL-2.0",
   "environment": "*",
@@ -19,6 +20,6 @@
     "minecraft": ">=1.20.1",
     "fabricloader": ">=0.14.21",
     "fabric": "*",
-    "cobblemon": ">=1.4.0"
+    "cobblemon": ">=1.5.0"
   }
 }

@@ -5,6 +5,7 @@ import com.google.gson.JsonParser
 import dev.roanoke.common.cobblemontools.CobblemonTools
 import dev.roanoke.common.cobblemontools.formats.CTTeam
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.io.BufferedReader
 import java.io.IOException
@@ -43,6 +44,14 @@ object CobblemonToolsAPI {
         } catch (e: IOException) {
             CobblemonTools.LOGGER.error("IO Exception when fetching Cobblemon Tools Team, is Cobblemon Tools up?", e)
             null
+        }
+    }
+
+    fun getTeamByIdJava(teamID: String): CompletableFuture<CTTeam?> {
+        return CompletableFuture.supplyAsync {
+            runBlocking {
+                getTeamById(teamID)
+            }
         }
     }
 
